@@ -24,7 +24,15 @@ public class TaskManager {
     public void subtaskCreate(String name, String description, int epicId) {
         Subtask subtask = new Subtask(name, description,epicId);
         subtasks.put(subtask.id, subtask);
+        checkEpicStatus(epicId);
     }
+
+    public void epicCreate(String name, String description) {
+        Epic epic = new Epic(name, description);
+        epics.put(epic.id, epic);
+    }
+
+    public void listTasks()
 
     //Возможность хранить задачи всех типов. Для этого вам нужно выбрать подходящую коллекцию.
     /*Методы для каждого из типа задач(Задача/Эпик/Подзадача):
