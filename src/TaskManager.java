@@ -17,7 +17,7 @@ public class TaskManager {
     //Создание задачи
     public void taskCreate(String name, String description) {
         Task task = new Task(name, description);
-        tasks.put(task.getId(), task);
+        tasks.put(task.id, task);
     }
 
 
@@ -32,18 +32,126 @@ public class TaskManager {
         epics.put(epic.id, epic);
     }
 
-    public void listTasks()
+    //Обновление информации о задаче
+    public void taskUpdate(Task task) {
+        tasks.put(task.id, task);
+
+    }
+    public void subtaskUpdate(Subtask subtask) {
+        subtasks.put(subtask.id, subtask);
+
+    }
+    public void epicUpdate(Epic epic) {
+        epics.put(epic.id, epic)
+
+    }
+    //Печать всех задач по типу
+    public void listTasks(String command) {
+        switch(command) {
+            case "TASK":
+                printTaskList();
+                break;
+            case "SUBTASK":
+                printSubtaskList();
+                break;
+            case "EPIC":
+                printEpicList();
+                break;
+            case "ALL":
+                printTaskList();
+                printSubtaskList();
+                printEpicList();
+                break;
+            default:
+                //int epicId = Integer.parseInt(command);
+                printEpicSubtasks(Integer.parseInt(command));
+
+        }
+    }
+
+    public void printTaskList() {
+        for (Task task : tasks.values()) {
+            System.out.println(task);
+        }
+    }
+    public void printSubtaskList() {
+        for (Subtask subtask : subtasks.values()) {
+            System.out.println(subtask);
+        }
+    }
+    public void printEpicList() {
+        for (Epic epic : epics.values()) {
+            System.out.println(epic);
+        }
+    }
+    public void printEpicSubtasks(int epicId) {
+        for (Subtask subtask : subtasks.values()) {
+            if (subtask.epicId == epicId) {
+                System.out.println(subtask);
+            }
+        }
+    }
+// Удаление всех задач по типу
+    public void deleteAllTasksByType(String command) {
+        switch (command) {
+            case "TASK":
+                tasks.clear();
+                break;
+            case "SUBTASK":
+                subtasks.clear();
+                break;
+            case "EPIC":
+                epics.clear();
+                break;
+        }
+    }
+    // Поиск задачи по ID
+    public void searchTaskById (int issId) {
+        boolean taskId = tasks.containsKey(issId);
+        boolean subtaskId = subtasks.containsKey(issId);
+        boolean epicId = epics.containsKey(issId);
+
+        if (taskId) {
+            System.out.println(tasks.get(issId));
+        } else if (subtaskId) {
+            System.out.println(subtasks.get(issId));
+        } else if (epicId) {
+            System.out.println(epics.get(issId));
+        } else {
+            System.out.println("Такой задачи не существует");
+        }
+    }
+    // удаление задачи по ID
+    public void removeTaskById (int issId) {
+        boolean taskId = tasks.containsKey(issId);
+        boolean subtaskId = subtasks.containsKey(issId);
+        boolean epicId = epics.containsKey(issId);
+        if (taskId) {
+            tasks.remove(issId);
+        } else if (subtaskId) {
+            subtasks.remove(issId);
+        } else if (epicId) {
+            for (Subtask subtask : subtasks.values()) {
+                if (subtask.epicId == issId) {
+                    subtasks.remove(subtask.id);
+                }
+            }
+            epics.remove(issId);
+        } else {
+            System.out.println("Такой задачи не существует");
+        }
+    }
 
     //Возможность хранить задачи всех типов. Для этого вам нужно выбрать подходящую коллекцию.
     /*Методы для каждого из типа задач(Задача/Эпик/Подзадача):
-    a. Получение списка всех задач.
-    b. Удаление всех задач.
-    c. Получение по идентификатору.
+    ------ a. Получение списка всех задач.
+    ------ b. Удаление всех задач.
+    ------c. Получение по идентификатору.
     d. Создание. Сам объект должен передаваться в качестве параметра.
     e. Обновление. Новая версия объекта с верным идентификатором передаётся в виде параметра.
-    f. Удаление по идентификатору.*/
+    -------f. Удаление по идентификатору.*/
     /*Дополнительные методы:
-    a. Получение списка всех подзадач определённого эпика.
+    -------- a. Получение списка всех подзадач определённого эпика.
     Управление статусами осуществляется по следующему правилу:
     a. Менеджер сам не выбирает статус для задачи. Информация о нём приходит менеджеру вместе с информацией о самой задаче. По этим данным в одних случаях он будет сохранять статус, в других будет рассчитывать.
     b. Для эпиков:
