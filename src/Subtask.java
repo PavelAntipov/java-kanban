@@ -8,6 +8,11 @@ public class Subtask extends Task {
         id = TaskManager.getNewTaskID();
         this.epicId = epicId;
     }
+    @Override
+    public String toString() {
+        return "id: " + id + "\nНазвание: " + name + "\nСтатус: " + status +
+                "\nОписание: " + description + "\nID Эпика: " + epicId;
+    }
 
     public boolean checkEpicExists(int epicId) {
        TaskManager.epics.containsKey(epicId);
@@ -18,9 +23,10 @@ public class Subtask extends Task {
        }
 
     }
-    private void addSubtaskToEpic (int epicId, int id) {
+    /*public static void addSubtaskToEpic (int epicId, int id) {
         Epic epic = TaskManager.epics.get(epicId);
         epic.subtaskList.add(id);
 
-    }
+    }*/
+
 }
