@@ -1,15 +1,26 @@
+package Issues;
+
+import Issues.Task;
+
 import java.util.ArrayList;
 
 public class Epic extends Task {
-    public ArrayList<Integer> subtaskList;
+    private ArrayList<Integer> subtaskList;
+
+
+    public ArrayList<Integer> getSubtaskList() {
+        return subtaskList;
+    }
+
+    public void setSubtaskList(ArrayList<Integer> subtaskList) {
+        this.subtaskList = subtaskList;
+    }
+
 
 
     public Epic(String name, String description) {
-        this.name = name;
-        this.description = description;
-        status = Statuses.NEW;
-        id = TaskManager.getNewTaskID();
-        subtaskList = new ArrayList<>();
+        super(name,description);
+        ArrayList<Integer> subtaskList = new ArrayList<>();
     }
 
     @Override
