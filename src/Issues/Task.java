@@ -7,6 +7,12 @@ public class Task {
     protected int id;
     protected Statuses status;
 
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+        status = Statuses.NEW;
+        id = 0;
+    }
     public String getName() {
         return name;
     }
@@ -39,12 +45,7 @@ public class Task {
         this.id = id;
     }
 
-     public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-        status = Statuses.NEW;
-        id = 0;
-    }
+
 
     @Override
     public String toString() {

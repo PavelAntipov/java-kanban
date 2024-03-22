@@ -5,6 +5,11 @@ import Issues.Task;
 public class Subtask extends Task {
     public int epicId;
 
+    public Subtask (String name, String description, int epicId) {
+        super(name, description);
+        this.epicId = epicId;
+    }
+
     public int getEpicId() {
         return epicId;
     }
@@ -13,10 +18,7 @@ public class Subtask extends Task {
         this.epicId = epicId;
     }
 
-    public Subtask (String name, String description, int epicId) {
-        super(name, description);
-        this.epicId = epicId;
-    }
+
     @Override
     public String toString() {
         return "id: " + id + "\nНазвание: " + name + "\nСтатус: " + status +
