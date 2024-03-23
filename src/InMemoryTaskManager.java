@@ -12,6 +12,7 @@ public class InMemoryTaskManager implements TaskManager{
     protected HashMap<Integer, Subtask> subtasks = new HashMap<>();
     protected HashMap<Integer, Epic> epics = new HashMap<>();
     //Метод для получения ID новой задачи
+    InMemoryHistoryManager history = new InMemoryHistoryManager();
 
     private int getNewTaskID() {
         idCounter++;
@@ -126,16 +127,19 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public Task getTaskById(int issId) {
+        history.add(tasks.get(issId));
         return tasks.get(issId);
     }
 
     @Override
     public Subtask getSubtaskById(int issId) {
+        history.add(subtasks.get(issId));
         return subtasks.get(issId);
     }
 
     @Override
     public Epic getEpicById(int issId) {
+        history.add(epics.get(issId));
         return epics.get(issId);
     }
 
