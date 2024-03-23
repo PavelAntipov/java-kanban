@@ -1,6 +1,4 @@
-package Issues;
-
-import Issues.Task;
+package issues;
 
 import java.util.ArrayList;
 

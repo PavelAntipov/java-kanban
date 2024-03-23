@@ -1,6 +1,4 @@
-package Issues;
-
-import Issues.Task;
+package issues;
 
 public class Subtask extends Task {
     public int epicId;

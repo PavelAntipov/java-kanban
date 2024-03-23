@@ -1,7 +1,7 @@
-import Issues.Epic;
-import Issues.Statuses;
-import Issues.Subtask;
-import Issues.Task;
+import issues.Epic;
+import issues.Statuses;
+import issues.Subtask;
+import issues.Task;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ public class TaskManager {
             subtask.setId(subtaskId);
             subtasks.put(subtaskId, subtask);
             epics.get(epicId).ammendSubtaskList(subtaskId);
+            checkEpicStatus(epicId);
 
         }
     }
@@ -138,12 +139,13 @@ public class TaskManager {
     }
 
     public void deleteEpicById(int issId) {
-        epics.remove(issId);
-        for (Subtask subtask : subtasks.values()) {
-            if (subtask.getEpicId() == issId) {
-                deleteSubtaskById(subtask.getId());
+
+        for (int subtaskId : getEpicById(issId).getSubtaskList()) {
+
+                deleteSubtaskById(issId);
             }
-        }
+        epics.remove(issId);
+
     }
 
     // Проверка наличия эпика
