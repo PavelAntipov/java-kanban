@@ -44,4 +44,6 @@ public interface TaskManager {
     void deleteSubtaskById(int issId);
 
     void deleteEpicById(int issId);
+
+    InMemoryHistoryManager getHistory();
 }

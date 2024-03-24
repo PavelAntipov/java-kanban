@@ -1,5 +1,7 @@
 package issues;
 
+import java.util.Objects;
+
 public class Task {
     protected String name;
     protected String description;
@@ -13,6 +15,7 @@ public class Task {
         status = Statuses.NEW;
         id = 0;
     }
+
     public String getName() {
         return name;
     }
@@ -46,10 +49,23 @@ public class Task {
     }
 
 
-
     @Override
     public String toString() {
         return "id: " + id + "\nНазвание: " + name + "\nСтатус: " + status +
                 "\nОписание: " + description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, id, status);
+    }
+
 }

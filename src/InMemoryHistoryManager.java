@@ -1,6 +1,7 @@
 import issues.Task;
 import java.util.List;
 import java.util.ArrayList;
+
 public class InMemoryHistoryManager implements HistoryManager{
     List<Task> history = new ArrayList<>();
     @Override

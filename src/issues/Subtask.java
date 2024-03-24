@@ -1,5 +1,7 @@
 package issues;
 
+import java.util.Objects;
+
 public class Subtask extends Task {
     public int epicId;
 
@@ -13,7 +15,10 @@ public class Subtask extends Task {
     }
 
     public void setEpicId(int epicId) {
-        this.epicId = epicId;
+        if (this.id != epicId) {
+            this.epicId = epicId;
+        }
+
     }
 
 
@@ -23,7 +28,10 @@ public class Subtask extends Task {
                 "\nОписание: " + description + "\nID Эпика: " + epicId;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, id, status,epicId);
+    }
 
 
 }

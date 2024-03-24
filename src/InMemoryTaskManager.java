@@ -7,12 +7,16 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class InMemoryTaskManager implements TaskManager{
-    private int idCounter = 1;
+    private int idCounter = 0;
     protected HashMap<Integer, Task> tasks = new HashMap<>();
     protected HashMap<Integer, Subtask> subtasks = new HashMap<>();
     protected HashMap<Integer, Epic> epics = new HashMap<>();
     //Метод для получения ID новой задачи
-    InMemoryHistoryManager history = new InMemoryHistoryManager();
+    private InMemoryHistoryManager history = new InMemoryHistoryManager();
+
+    public InMemoryHistoryManager getHistory() {
+        return history;
+    }
 
     private int getNewTaskID() {
         idCounter++;
@@ -30,21 +34,19 @@ public class InMemoryTaskManager implements TaskManager{
     @Override
     public void subtaskCreate(Subtask subtask) {
         int epicId = subtask.getEpicId();
-        if (!epics.containsKey(epicId)) {
-            return;
-        } else {
+        if (epics.containsKey(epicId)) {
             int subtaskId = getNewTaskID();
             subtask.setId(subtaskId);
             subtasks.put(subtaskId, subtask);
             epics.get(epicId).ammendSubtaskList(subtaskId);
             checkEpicStatus(epicId);
-
         }
     }
 
     @Override
     public void epicCreate(Epic epic) {
         int epicId = getNewTaskID();
+        epic.setId(epicId);
         epics.put(epicId, epic);
     }
 
@@ -61,7 +63,6 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public void subtaskUpdate(Subtask subtask) {
-        int issId = subtask.getId();
         if (!subtasks.containsKey(subtask.getId()) || !epics.containsKey(subtask.getEpicId())) {
             return;
         }

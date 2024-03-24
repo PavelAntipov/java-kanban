@@ -1,12 +1,15 @@
 package issues;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class Epic extends Task {
     private ArrayList<Integer> subtaskList;
     public Epic(String name, String description) {
         super(name,description);
-        ArrayList<Integer> subtaskList = new ArrayList<>();
+        this.subtaskList = new ArrayList<>();
+
     }
 
     public ArrayList<Integer> getSubtaskList() {
@@ -19,7 +22,9 @@ public class Epic extends Task {
     }
 
     public void ammendSubtaskList(int issId) {
-        subtaskList.add(issId);
+        if (this.id != issId) {
+            subtaskList.add(issId);
+        }
     }
 
     public void deleteSubtaskFromList(int issId) {
@@ -29,6 +34,10 @@ public class Epic extends Task {
     public String toString() {
         return "id: " + id + "\nНазвание: " + name + "\nСтатус: " + status +
                 "\nОписание: " + description + "\nСписок подзадач: " + subtaskList;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, id, status,subtaskList);
     }
 
 
