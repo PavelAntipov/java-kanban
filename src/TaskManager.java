@@ -3,6 +3,7 @@ import issues.Subtask;
 import issues.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     void taskCreate(Task task);
@@ -18,11 +19,11 @@ public interface TaskManager {
 
     void epicUpdate(Epic epic);
 
-    ArrayList<Task> TaskList();
+    List<Task> TaskList();
 
-    ArrayList<Subtask> SubtaskList();
+    List<Subtask> SubtaskList();
 
-    ArrayList<Epic> EpicList();
+    List<Epic> EpicList();
 
     //Получение списка сабтасков эпика
     ArrayList<Integer> EpicSubtaskList(int epicId);
@@ -45,5 +46,5 @@ public interface TaskManager {
 
     void deleteEpicById(int issId);
 
-    InMemoryHistoryManager getHistory();
+    public List<Task> getHistoryManager();
 }

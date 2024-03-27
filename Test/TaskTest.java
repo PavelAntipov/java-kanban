@@ -1,7 +1,6 @@
-package issues;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import issues.Task;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
@@ -12,7 +11,7 @@ class TaskTest {
         task1.setId(205);
         task2.setId(205);
         boolean result = task1.equals(task2);
-        assertTrue(result);
+        Assertions.assertTrue(result);
 
 
     }

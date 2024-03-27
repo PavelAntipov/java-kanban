@@ -1,10 +1,14 @@
 import issues.Task;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
-    InMemoryTaskManager taskManager = new InMemoryTaskManager();
+
+        TaskManager taskManager = Managers.getDefault();
+
     @Test
     public void ManagerCanAddAndSearchTasks(){
         Task task1 = new Task("name1","description1");
@@ -16,9 +20,9 @@ class InMemoryHistoryManagerTest {
         taskManager.taskUpdate(task2);
 
         task = taskManager.getTaskById(1);
-        Task history1 = taskManager.getHistory().getHistory().get(0);
-        Task history2 = taskManager.getHistory().getHistory().get(1);
-        assertNotEquals(history1.hashCode(),history2.hashCode());
+        Task history1 = taskManager.getHistoryManager().get(0);
+        Task history2 = taskManager.getHistoryManager().get(1);
+        Assertions.assertNotEquals(history1.hashCode(),history2.hashCode());
     }
 
 }

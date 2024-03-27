@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import issues.Task;
 
@@ -13,8 +14,8 @@ class ManagersTest {
         Task task1 = taskManager.getTaskById(1);
 
 
-        assertNotNull(taskManager.getHistory().getHistory());
-        assertEquals(taskManager.getHistory().getHistory().get(0),task1);
+        Assertions.assertNotNull(taskManager.getHistoryManager());
+        Assertions.assertEquals(taskManager.getHistoryManager().get(0),task1);
 
 
     }

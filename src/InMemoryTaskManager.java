@@ -5,17 +5,23 @@ import issues.Task;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager{
     private int idCounter = 0;
-    protected HashMap<Integer, Task> tasks = new HashMap<>();
-    protected HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    protected HashMap<Integer, Epic> epics = new HashMap<>();
+    protected Map<Integer, Task> tasks = new HashMap<>();
+    protected Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected Map<Integer, Epic> epics = new HashMap<>();
     //Метод для получения ID новой задачи
-    private InMemoryHistoryManager history = new InMemoryHistoryManager();
+    private HistoryManager historyManager;
+    public InMemoryTaskManager(HistoryManager historyManager) {
+        this.historyManager = historyManager;
+    }
 
-    public InMemoryHistoryManager getHistory() {
-        return history;
+
+    public List<Task> getHistoryManager() {
+        return historyManager.getHistory();
     }
 
     private int getNewTaskID() {
@@ -82,17 +88,17 @@ public class InMemoryTaskManager implements TaskManager{
     //Возвращение всех задач в зависимости от типа задачи
 
     @Override
-    public ArrayList<Task> TaskList() {
+    public List<Task> TaskList() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public ArrayList<Subtask> SubtaskList() {
+    public List<Subtask> SubtaskList() {
         return new ArrayList<>(subtasks.values());
     }
 
     @Override
-    public ArrayList<Epic> EpicList() {
+    public List<Epic> EpicList() {
         return new ArrayList<>(epics.values());
     }
 
@@ -128,19 +134,19 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public Task getTaskById(int issId) {
-        history.add(tasks.get(issId));
+        historyManager.add(tasks.get(issId));
         return tasks.get(issId);
     }
 
     @Override
     public Subtask getSubtaskById(int issId) {
-        history.add(subtasks.get(issId));
+        historyManager.add(subtasks.get(issId));
         return subtasks.get(issId);
     }
 
     @Override
     public Epic getEpicById(int issId) {
-        history.add(epics.get(issId));
+        historyManager.add(epics.get(issId));
         return epics.get(issId);
     }
 
@@ -163,13 +169,11 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public void deleteEpicById(int issId) {
-
-        for (int subtaskId : getEpicById(issId).getSubtaskList()) {
-
-            deleteSubtaskById(issId);
-        }
+        ArrayList<Integer> subtaskList = epics.get(issId).getSubtaskList();
         epics.remove(issId);
-
+        for (int subtaskId : subtaskList) {
+            deleteSubtaskById(subtaskId);
+        }
     }
 
     // Проверка наличия эпика
@@ -179,9 +183,10 @@ public class InMemoryTaskManager implements TaskManager{
 
 
     private void checkEpicStatus(int epicId) {
-        ArrayList<Integer> subtaskList = epics.get(epicId).getSubtaskList();
+        Epic epic = epics.get(epicId);
+        ArrayList<Integer> subtaskList = epic.getSubtaskList();
         if (subtaskList.size() == 0) {
-            epics.get(epicId).setStatus(Statuses.NEW);
+            epic.setStatus(Statuses.NEW);
         } else {
             int stsDone = 0;
             int stsNew = 0;
@@ -192,18 +197,18 @@ public class InMemoryTaskManager implements TaskManager{
                         stsNew++;
                         break;
                     case IN_PROGRESS:
-                        epics.get(epicId).setStatus(Statuses.IN_PROGRESS);
+                        epic.setStatus(Statuses.IN_PROGRESS);
                         return;
                     case DONE:
                         stsDone++;
                         break;
                 }
                 if (stsDone == 0) {
-                    epics.get(epicId).setStatus(Statuses.NEW);
+                    epic.setStatus(Statuses.NEW);
                 } else if (stsNew == 0) {
-                    epics.get(epicId).setStatus(Statuses.DONE);
+                    epic.setStatus(Statuses.DONE);
                 } else {
-                    epics.get(epicId).setStatus(Statuses.IN_PROGRESS);
+                    epic.setStatus(Statuses.IN_PROGRESS);
                 }
 
 
