@@ -19,14 +19,14 @@ public interface TaskManager {
 
     void epicUpdate(Epic epic);
 
-    List<Task> TaskList();
+    List<Task> taskList();
 
-    List<Subtask> SubtaskList();
+    List<Subtask> subtaskList();
 
-    List<Epic> EpicList();
+    List<Epic> epicList();
 
     //Получение списка сабтасков эпика
-    ArrayList<Integer> EpicSubtaskList(int epicId);
+    ArrayList<Integer> epicSubtaskList(int epicId);
 
     void deleteTasks();
 

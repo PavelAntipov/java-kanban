@@ -8,15 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryTaskManager implements TaskManager{
+public class InMemoryTaskManager implements TaskManager {
     private int idCounter = 0;
     protected Map<Integer, Task> tasks = new HashMap<>();
     protected Map<Integer, Subtask> subtasks = new HashMap<>();
     protected Map<Integer, Epic> epics = new HashMap<>();
     //Метод для получения ID новой задачи
     private HistoryManager historyManager;
-    public InMemoryTaskManager(HistoryManager historyManager) {
-        this.historyManager = historyManager;
+
+    public InMemoryTaskManager() {
+
+        this.historyManager = Managers.getDefaultHistoryManager();
     }
 
 
@@ -88,23 +90,23 @@ public class InMemoryTaskManager implements TaskManager{
     //Возвращение всех задач в зависимости от типа задачи
 
     @Override
-    public List<Task> TaskList() {
+    public List<Task> taskList() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public List<Subtask> SubtaskList() {
+    public List<Subtask> subtaskList() {
         return new ArrayList<>(subtasks.values());
     }
 
     @Override
-    public List<Epic> EpicList() {
+    public List<Epic> epicList() {
         return new ArrayList<>(epics.values());
     }
 
     //Получение списка сабтасков эпика
     @Override
-    public ArrayList<Integer> EpicSubtaskList(int epicId) {
+    public ArrayList<Integer> epicSubtaskList(int epicId) {
         return epics.get(epicId).getSubtaskList();
     }
 
@@ -152,9 +154,7 @@ public class InMemoryTaskManager implements TaskManager{
 
     @Override
     public void deleteTaskById(int issId) {
-        if (tasks.containsKey(issId)) {
-            tasks.remove(issId);
-        }
+        tasks.remove(issId);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class InMemoryTaskManager implements TaskManager{
     private void checkEpicStatus(int epicId) {
         Epic epic = epics.get(epicId);
         ArrayList<Integer> subtaskList = epic.getSubtaskList();
-        if (subtaskList.size() == 0) {
+        if (subtaskList.isEmpty()) {
             epic.setStatus(Statuses.NEW);
         } else {
             int stsDone = 0;

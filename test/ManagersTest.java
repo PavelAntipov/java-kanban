@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ManagersTest {
     @Test
     public void taskManagerInitialization(){
-        TaskManager taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefaultTaskManager();
         Task task = new Task("Name1","Desc1");
         taskManager.taskCreate(task);
         Task task1 = taskManager.getTaskById(1);

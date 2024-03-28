@@ -1,13 +1,12 @@
 import issues.Task;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
 
-        TaskManager taskManager = Managers.getDefault();
+        TaskManager taskManager = Managers.getDefaultTaskManager();
 
     @Test
     public void ManagerCanAddAndSearchTasks(){
