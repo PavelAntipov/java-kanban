@@ -162,7 +162,10 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteSubtaskById(int issId) {
         if (subtasks.containsKey(issId)) {
             int epicId = subtasks.get(issId).getEpicId();
-            epics.get(epicId).getSubtaskList().remove(issId);
+            Epic ep = epics.get(epicId);
+            ArrayList<Integer> ar = ep.getSubtaskList();
+            ar.remove(Integer.valueOf(issId));
+            //epics.get(epicId).getSubtaskList().remove(issId);
             checkEpicStatus(epicId);
             historyManager.remove(issId);
             subtasks.remove(issId);
@@ -172,11 +175,17 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteEpicById(int issId) {
         ArrayList<Integer> subtaskList = epics.get(issId).getSubtaskList();
+        for (int subtaskId : subtaskList) {
+            // Проверка на наличие просмотра подзадач. Если они не были просмотрены, то
+            // получим nullPointerException
+            if (historyManager.getHistory().contains(subtasks.get(subtaskId))) {
+                historyManager.remove(subtaskId);
+            }
+
+            subtasks.remove(subtaskId);
+        }
         historyManager.remove(issId);
         epics.remove(issId);
-        for (int subtaskId : subtaskList) {
-            deleteSubtaskById(subtaskId);
-        }
     }
 
     // Проверка наличия эпика

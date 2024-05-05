@@ -32,8 +32,8 @@ public class Epic extends Task {
     }
     @Override
     public String toString() {
-        return "id: " + id + "\nНазвание: " + name + "\nСтатус: " + status +
-                "\nОписание: " + description + "\nСписок подзадач: " + subtaskList;
+        return "id: " + id + " Название: " + name + " Статус: " + status +
+                " Описание: " + description + " Список подзадач: " + subtaskList + "\n";
     }
     @Override
     public int hashCode() {
