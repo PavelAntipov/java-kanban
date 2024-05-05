@@ -83,10 +83,9 @@ public class InMemoryHistoryManager implements HistoryManager {
             if (oldEntry.getTail() == null && !oldEntry.getData().equals(taskNode.getData())) {
                 taskNode.setHead(oldEntry);
                 oldEntry.setTail(taskNode);
+                //listOfTasks.put(task.getId(), taskNode);
             }
-        }
-        //listOfTasks.put(task.getId(), taskNode);
-        else if (!listOfTasks.containsKey(task.getId())) {
+        } else if (!listOfTasks.containsKey(task.getId())) {
             for (Node<Task> oldEntry : listOfTasks.values()) {
                 if (oldEntry.getTail() == null) {
                     taskNode.setHead(oldEntry);
