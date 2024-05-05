@@ -72,8 +72,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             }
 
 
-            //общий случай
-            //for (Node<Task> oldEntry : listOfTasks.values()) {
+
             //Ищем соседние элементы в истории и связываем их между собой, чтобы переместить
             // вызываемый элемент в конец списка
 
@@ -119,8 +118,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             head.setTail(tail);
             tail.setHead(head);
         }
-        //head.setTail(tail);
-        //tail.setHead(head);
+
         listOfTasks.remove(taskId);
 
     }
