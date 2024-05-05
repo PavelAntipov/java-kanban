@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EpicTest {
 
     @Test
-    public void checkEpicEquals(){
+    public void checkEpicEquals() {
         Epic epic1 = new Epic("Name1","Desc1");
         Epic epic2 = new Epic("Name2","Desc2");
         epic1.setId(205);
@@ -17,7 +17,7 @@ class EpicTest {
     }
 
     @Test
-    public void epicCantBeAddedAsSubtaskToItself(){
+    public void epicCantBeAddedAsSubtaskToItself() {
         Epic epic1 = new Epic("Name1","Desc1");
         epic1.setId(205);
         epic1.ammendSubtaskList(205);
