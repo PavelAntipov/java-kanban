@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EpicTest {
+
     @Test
     public void checkEpicEquals(){
         Epic epic1 = new Epic("Name1","Desc1");
@@ -13,9 +14,8 @@ class EpicTest {
         epic2.setId(205);
         boolean result = epic1.equals(epic2);
         assertTrue(result);
-
-
     }
+
     @Test
     public void epicCantBeAddedAsSubtaskToItself(){
         Epic epic1 = new Epic("Name1","Desc1");
