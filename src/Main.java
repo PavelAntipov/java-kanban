@@ -12,17 +12,17 @@ public class Main {
         taskManager.taskCreate(task2);
 
         //Создание эпика с тремя сабтасками
-        Epic epic1 = new Epic ("Epic1","Epic1 description");
+        Epic epic1 = new Epic("Epic1","Epic1 description");
         taskManager.epicCreate(epic1);
         Subtask subtask1 = new Subtask("Subtask1","Subtask1 description",3);
-        Subtask subtask2 = new Subtask("Subtask2","Subtask2 description",3) ;
-        Subtask subtask3 = new Subtask("Subtask3","Subtask3 description",3) ;
+        Subtask subtask2 = new Subtask("Subtask2","Subtask2 description",3);
+        Subtask subtask3 = new Subtask("Subtask3","Subtask3 description",3);
         taskManager.subtaskCreate(subtask1);
         taskManager.subtaskCreate(subtask2);
         taskManager.subtaskCreate(subtask3);
 
         //Создание эпика без сабтасков
-        Epic epic2 = new Epic ("Epic2","Epic2 description");
+        Epic epic2 = new Epic("Epic2","Epic2 description");
         taskManager.epicCreate(epic2);
 
         Task task = taskManager.getTaskById(1);
