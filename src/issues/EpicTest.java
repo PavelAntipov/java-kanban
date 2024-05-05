@@ -21,6 +21,6 @@ class EpicTest {
         Epic epic1 = new Epic("Name1","Desc1");
         epic1.setId(205);
         epic1.ammendSubtaskList(205);
-        assertNull(epic1.getSubtaskList());
+        assertEquals(epic1.getSubtaskList().size(),0);
     }
 }
