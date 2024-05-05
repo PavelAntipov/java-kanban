@@ -1,9 +1,5 @@
 import issues.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefaultTaskManager();

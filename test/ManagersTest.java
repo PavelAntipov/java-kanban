@@ -3,8 +3,6 @@ import org.junit.jupiter.api.Test;
 import issues.Task;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ManagersTest {
     @Test
     public void taskManagerInitialization(){
