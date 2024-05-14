@@ -12,7 +12,7 @@ public class Node<T> {
     }
 
     public T getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(T data) {
@@ -20,7 +20,7 @@ public class Node<T> {
     }
 
     public Node<T> getHead() {
-        return head;
+        return this.head;
     }
 
     public void setHead(Node<T> head) {
@@ -28,7 +28,7 @@ public class Node<T> {
     }
 
     public Node<T> getTail() {
-        return tail;
+        return this.tail;
     }
 
     public void setTail(Node<T> tail) {
