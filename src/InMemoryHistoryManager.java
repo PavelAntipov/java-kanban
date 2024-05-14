@@ -83,11 +83,11 @@ public class InMemoryHistoryManager implements HistoryManager {
             listOfTasks.clear();
             first = null;
             last = null;
-        } else if (head == null) {//проверка на первый элемент в истории
+        } else if (head == null) { //проверка на первый элемент в истории
             tail.setHead(null);
             listOfTasks.remove(taskId);
             first = tail;
-        } else if (tail == null) {//проверка на последний элемент в истории
+        } else if (tail == null) { //проверка на последний элемент в истории
             head.setTail(null);
             last = head;
         } else {
