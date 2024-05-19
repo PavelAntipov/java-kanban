@@ -1,9 +1,6 @@
 import issues.Task;
 
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node<Task>> listOfTasks = new HashMap<>();
@@ -25,15 +22,12 @@ public class InMemoryHistoryManager implements HistoryManager {
             taskList.add(head.getTail().getData());
             head = head.getTail();
         }
-
-
         return taskList;
-
     }
 
     private boolean taskIsNull(Task task) {
         boolean result = false;
-        if (task.equals(null)) {
+        if (task == null) {
             result = true;
         }
         return result;
@@ -45,30 +39,24 @@ public class InMemoryHistoryManager implements HistoryManager {
             return;
         }
         Node<Task> newNode = new Node<>(task);
-        if (listOfTasks.isEmpty()) { //мапа пустая
-            listOfTasks.put(task.getId(), newNode);
-            first = newNode;
-            last = newNode;
-        } else if (!listOfTasks.containsKey(task.getId())) { //задача раньше не просматривалась
-            addLast(newNode);
-        } else { //задача раньше просматривалась
+        if (listOfTasks.containsKey(task.getId())) { //задача раньше просматривалась
             remove(task.getId());
-            if (listOfTasks.isEmpty()) { //мапа пустая после удаления элемента истории
-                listOfTasks.put(task.getId(), newNode);
-                first = newNode;
-                last = newNode;
-            } else {
-                addLast(newNode);
-            }
         }
-
+        addLast(task);
     }
 
-    private void addLast(Node<Task> newNode) {
-        last.setTail(newNode);
-        newNode.setHead(last);
-        listOfTasks.put(newNode.getData().getId(), newNode);
+    public void addLast(Task task) {
+        final Node<Task> l = last;
+        final Node<Task> newNode = new Node<>(l, task, null);
         last = newNode;
+        if (l == null) {
+            first = newNode;
+        } else {
+            l.setTail(newNode);
+        }
+        listOfTasks.put(task.getId(), newNode);
+
+
     }
 
     @Override

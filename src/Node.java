@@ -7,8 +7,12 @@ public class Node<T> {
 
     public Node(T data) {
         this.data = data;
-        this.head = null;
-        this.tail = null;
+    }
+
+    public Node(Node<T> head, T data, Node<T> tail) {
+        this.head = head;
+        this.data = data;
+        this.tail = tail;
     }
 
     public T getData() {
