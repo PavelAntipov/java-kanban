@@ -5,7 +5,9 @@ import issues.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public interface TaskManager {
+
     void taskCreate(Task task);
 
     void subtaskCreate(Subtask subtask);
@@ -46,5 +48,5 @@ public interface TaskManager {
 
     void deleteEpicById(int issId);
 
-    public List<Task> getHistoryManager();
+    List<Task> getHistoryManager();
 }

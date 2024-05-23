@@ -7,18 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import issues.*;
 
 class TaskManagerTest {
-    private TaskManager taskManager;
-    Task task1;
-    Epic epic1;
-    Subtask subtask1;
-    @BeforeEach
-    public void BeforeEach(){
-        TaskManager taskManager = Managers.getDefaultTaskManager();
-        Task task1 = new Task("name1", "description1");
-        Epic epic1 = new Epic("epicname1", "epicdescription1");
-        Subtask subtask1 = new Subtask("subtaskname1", "subtaskdescription1", 2);
-    }
-
+    private TaskManager taskManager = Managers.getDefaultTaskManager();
+    Task task1 = new Task("name1", "description1");;
+    Epic  epic1 = new Epic("epicname1", "epicdescription1");
+    Subtask subtask1 = new Subtask("subtaskname1", "subtaskdescription1", 2);
 
 
     @Test
